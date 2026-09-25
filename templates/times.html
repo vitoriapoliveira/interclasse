@@ -2,46 +2,69 @@
 {% block titulo %}Times{% endblock %}
 
 {% block conteudo %}
-    <div class="cabecalho-pagina">
-        <div>
-            <h1>Times</h1>
-            <p class="subtitulo">Cadastro dos times do interclasse</p>
-        </div>
-        {% if not editar %}
-        <a href="{{ url_for('novo_time') }}" class="botao">+ Novo Time</a>
-        {% endif %}
+<div class="cabecalho-pagina">
+    <div>
+        <h1>Times</h1>
+        <p class="subtitulo">Cadastro dos times do interclasse</p>
     </div>
-
-    {% if request.endpoint == 'novo_time' %}
-    <section class="painel formulario">
-        <h2>Novo Time</h2>
-        <form method="POST" action="{{ url_for('novo_time') }}">
-            <div class="linha-campos">
-                <div class="campo">
-                    <label for="nome">Nome do Time *</label>
-                    <input type="text" id="nome" name="nome" required>
-                </div>
-                <div class="campo campo-cor">
-                    <label for="cor">Cor</label>
-                    <input type="text" id="cor" name="cor" placeholder="Ex: Azul">
-                </div>
-            </div>
-            <div class="acoes-form">
-                <button type="submit" class="botao">Cadastrar</button>
-                <a href="{{ url_for('listar_times') }}" class="botao botao-secundario">Cancelar</a>
-            </div>
-        </form>
-    </section>
+    {% if not editar %}
+    <a href="{{ url_for('novo_time') }}" class="botao">+ Novo Time</a>
     {% endif %}
+</div>
 
-    <section class="painel">
-        <h2>Lista de Times</h2>
-        {% if times %}
-        <table>
-<!--           Insira sua tabela aqui -->
-        </table>
-        {% else %}
-            <p class="vazio">Nenhum time cadastrado ainda.</p>
-        {% endif %}
-    </section>
+{% if request.endpoint == 'novo_time' %}
+<section class="painel formulario">
+    <h2>Novo Time</h2>
+    <form method="POST" action="{{ url_for('novo_time') }}">
+        <div class="linha-campos">
+            <div class="campo">
+                <label for="nome">Nome do Time *</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+            <div class="campo">
+                <label for="turma">turma</label>
+                <input type="text" id="turma" name="turma" placeholder="Ex:2 EM">
+            </div>
+            <div class="campo">
+                <label for="responsavel">responsavel</label>
+                <input type="text" id="responsavel" name="responsavel">
+            </div>
+        </div>
+        <div class="acoes-form">
+            <button type="submit" class="botao">Cadastrar</button>
+            <a href="{{ url_for('listar_times') }}" class="botao botao-secundario">Cancelar</a>
+        </div>
+    </form>
+</section>
+{% endif %}
+
+<section class="painel">
+    <h2>Lista de Times</h2>
+    {% if times %}
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>turma</th>
+            <th>responsavel</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for time in times %}
+        <tr>
+            <td>{{time.id }}</td>
+            <td>{{time.nome }}</td>
+            <td>{{time.turma }}</td>
+            <td>{{time.responsavel }}</td>
+
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="vazio">Nenhum time cadastrado ainda.</p>
+    {% endif %}
+</section>
 {% endblock %}
+
