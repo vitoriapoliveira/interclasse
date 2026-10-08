@@ -1,11 +1,9 @@
-import os
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey
-from sqlalchemy.orm import declarative_base, relationship, sessionmaker, scoped_session
+from sqlalchemy.orm import declarative_base, relationship, sessionmaker,scoped_session
 
 engine = create_engine("mysql+pymysql://root:senaisp@localhost:3306/interclasse_db")
-db_session = scoped_session(sessionmaker(bind=engine))
 
-SessionLocal = sessionmaker(bind=engine)
+db_session = scoped_session(sessionmaker(bind=engine))
 
 Base = declarative_base()
 

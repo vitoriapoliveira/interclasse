@@ -19,16 +19,19 @@
         <div class="linha-campos">
             <div class="campo">
                 <label for="nome">Nome do Time *</label>
-                <input type="text" id="nome" name="nome" required>
+                <input type="text" id="nome" name="nome">
             </div>
             <div class="campo">
-                <label for="turma">turma</label>
-                <input type="text" id="turma" name="turma" placeholder="Ex:2 EM">
+                <label for="turma">Turma</label>
+                <input type="text" id="turma" name="turma" placeholder="Ex: 2-EM">
             </div>
+
             <div class="campo">
-                <label for="responsavel">responsavel</label>
-                <input type="text" id="responsavel" name="responsavel">
+                <label for="responsavel">Responsavel</label>
+                <input type="text" id="responsavel" name="responsavel" placeholder="Ex:matue">
             </div>
+
+
         </div>
         <div class="acoes-form">
             <button type="submit" class="botao">Cadastrar</button>
@@ -42,23 +45,26 @@
     <h2>Lista de Times</h2>
     {% if times %}
     <table>
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nome</th>
-            <th>turma</th>
-            <th>responsavel</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for time in times %}
-        <tr>
-            <td>{{time.id }}</td>
-            <td>{{time.nome }}</td>
-            <td>{{time.turma }}</td>
-            <td>{{time.responsavel }}</td>
+        <theaed>
+            <tr>
+                <th>id</th>
+                <th>nome</th>
+                <th>turma</th>
+                <th>jogadores</th>
+                <th>responsavel</th>
+            </tr>
+        </theaed>
 
-        </tr>
+        <tbody>
+        {% for time,jogadores in times %}
+            <tr>
+                <td>{{ time.id }}</td>
+                <td>{{ time.nome }}</td>
+                <td>{{ time.turma }}</td>
+                <td>{{ jogadores }}</td>
+                <td>{{ time.responsavel }}</td>
+
+            </tr>
         {% endfor %}
         </tbody>
     </table>
@@ -67,4 +73,3 @@
     {% endif %}
 </section>
 {% endblock %}
-
